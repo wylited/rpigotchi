@@ -23,7 +23,7 @@ use std::thread;
 use std::time::Duration;
 use thiserror::Error;
 
-mod utils; // Assuming your draw_text is here
+mod utils;
 use utils::draw_text;
 
 #[derive(Error, Debug)]
@@ -43,7 +43,7 @@ pub struct EpaperApp {
     epd: Epd2in13<SpidevDevice, SysfsPin, SysfsPin, SysfsPin, Delay>,
     display: Display2in13,
     delay: Delay,
-    // Keep pins for proper cleanup
+    // keep pins for proper cleanup
     // cs: SysfsPin,
     // busy: SysfsPin,
     // dc: SysfsPin,
@@ -183,13 +183,13 @@ impl EpaperApp {
             .draw(&mut self.display)
             .map_err(|_| EpaperError::DisplayInit)?;
 
-            // Draw text indicating how to exit
+            // draw text indicating how to exit
             draw_text(&mut self.display, "Press Ctrl+C to exit", 0, 112);
 
             let now = Local::now();
             let time_str = now.format("%H:%M:%S").to_string();
 
-            // Draw the time text
+            // draw the time text
             draw_text(
                 &mut self.display,
                 &time_str,
@@ -197,17 +197,17 @@ impl EpaperApp {
                 112,
             );
 
-            // Update the display
+            // update the display
             self.epd.update_and_display_frame(
                 &mut self.spi,
                 self.display.buffer(),
                 &mut self.delay,
             )?;
 
-            // Move to next spinner frame
+            // move to next spinner frame
             i = (i + 1) % spinner.len();
 
-            // Short delay between frames
+            // short delay between frames
             thread::sleep(Duration::from_millis(500));
         }
 
@@ -239,7 +239,6 @@ pub fn run_epaper_app() -> Result<(), EpaperError> {
     Ok(())
 }
 
-// Example of running in a thread
 pub fn run_epaper_threaded() -> Result<(), EpaperError> {
     let handle = thread::spawn(|| -> Result<(), EpaperError> {
         let mut app = EpaperApp::new()?;
@@ -253,7 +252,6 @@ pub fn run_epaper_threaded() -> Result<(), EpaperError> {
 }
 
 fn main() -> Result<(), EpaperError> {
-    // You can run it directly
     run_epaper_app()?;
     // Or in a thread
     // run_epaper_threaded()?;
