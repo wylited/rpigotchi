@@ -1,0 +1,18 @@
+[package]
+name = "piknife"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.98"
+chrono = "0.4.41"
+ctrlc = "3.4.7"
+embedded-graphics = "0.8.1"
+embedded-hal = "1.0.0"
+epd-waveshare = { version = "0.6.0", features = ["graphics"] }
+futures-util = "0.3.31"
+linux-embedded-hal = "0.4.0"
+rppal = "0.22.1"
+thiserror = "2.0.12"
+tokio = { version = "1.46.1", features = ["full"] }
+tokio-tungstenite = "0.27.0"
