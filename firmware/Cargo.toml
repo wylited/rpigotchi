@@ -7,6 +7,7 @@ edition = "2021"
 anyhow = "1.0.98"
 chrono = "0.4.41"
 ctrlc = "3.4.7"
+dotenv = "0.15.0"
 embedded-graphics = "0.8.1"
 embedded-hal = "1.0.0"
 epd-waveshare = { version = "0.6.0", features = ["graphics"] }

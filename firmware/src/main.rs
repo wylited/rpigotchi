@@ -25,6 +25,7 @@ use thiserror::Error;
 
 mod utils;
 use utils::draw_text;
+mod spotify;
 
 #[derive(Error, Debug)]
 pub enum EpaperError {
